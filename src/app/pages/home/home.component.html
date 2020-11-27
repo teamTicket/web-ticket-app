@@ -1,0 +1,145 @@
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white">Logo</div>
+
+        <div class="list-group list-group-flush">
+            <a [routerLink]="['/home']" routerLinkActive="text-blue" class="list-group-item list-group-item-action bg no-border">
+                <i class="fas fa-home"></i> Home</a>
+
+            <a [routerLink]="['/clientes']" routerLinkActive="text-blue" class="list-group-item list-group-item-action bg text-white no-border">
+                <i class="far fa-user"></i> Usuarios</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <app-navbar></app-navbar>
+
+        <div class="container-fluid bg-g">
+
+            <!-- PRIMERA FILA PRINCIPAL -->
+            <div class="row mt-4 ">
+                <!-- Card gráfica ticket semanal-->
+                <div class="col-lg-6 col-12">
+
+                    <div class="card">
+                        <div class="card-header bg-white card-nb">
+                            <div class="">
+                                <div class="row mb-0">
+                                    <div class="col">
+                                        <p>Ticket</p>
+                                    </div>
+                                    <div class="col-6">
+
+                                    </div>
+                                    <div class="col">
+                                        <!-- Dropdown selección de gráfica -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary">{{this.chartSeleccionado}}</button>
+                                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" (click)="semanalSeleccionado()">Semanal</a>
+                                                <a class="dropdown-item" (click)="mensualSeleccionado()">Mensual</a>
+                                                <a class="dropdown-item" (click)="anualSeleccionado()">Anual</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="container">
+                                        <ul class="list-inline text-center">
+                                            <li class="list-inline-item"><a class="text-circle"><i class="far fa-circle circle-abierto"></i> Abierto </a></li>
+                                            <li class="list-inline-item"><a class="text-circle"><i class="far fa-circle circle-cerrado"></i> Cerrado </a></li>
+                                            <li class="list-inline-item"><a class="text-circle"><i class="far fa-circle circle-pendiente"></i> Pendiente</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <app-chartticketsemanal *ngIf="verChartSemanal"></app-chartticketsemanal>
+                            <app-chartticketmensual *ngIf="verChartMensual"></app-chartticketmensual>
+                            <app-chartticketanual *ngIf="verChartAnual"></app-chartticketanual>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Card gráfica pastel clientes  -->
+                <div class="col-lg-6 col-12">
+                    <app-chartclientes></app-chartclientes>
+                </div>
+            </div>
+            <!-- SEGUNDA FILA PRINCIPAL -->
+            <div class="row mt-4 mb-4">
+                <!-- Card grafica promedio atención -->
+                <div class="col-lg-4 col-12">
+                    <app-chartpromedioatencion></app-chartpromedioatencion>
+                </div>
+                <!-- Card usuarios -->
+                <div class="col-lg-4 col-12">
+
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            Usuarios
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item card-nb">
+                                    <a class="img-fluid rounded-circle mr-2" href="#"><img class="avatar-s" src="assets/img/user.png" alt="usuario"></a>
+                                    Joel Hoil</li>
+                                <li class="list-group-item card-nb">
+                                    <a class="img-fluid rounded-circle mr-2" href="#"><img class="avatar-s" src="assets/img/user2.png" alt="usuario"></a>
+                                    Roger Euan</li>
+                                <li class="list-group-item card-nb">
+                                    <a class="img-fluid rounded-circle mr-2" href="#"><img class="avatar-s" src="assets/img/user.png" alt="usuario"></a>
+                                    Salomon Azcorra</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Card últmimos tickets -->
+                <div class="col-lg-4 col-12">
+
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            Últimos Tickets
+                        </div>
+                        <div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <small>#3434</small>
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <small>#3434</small>
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <small>#3434</small>
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    <!-- Menu Toggle Script -->
+
+
+
+</div>
