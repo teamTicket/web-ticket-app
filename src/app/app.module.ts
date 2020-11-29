@@ -13,6 +13,8 @@ import { ChartpromedioatencionComponent } from './components/chartpromedioatenci
 import { ChartticketmensualComponent } from './components/chartticketmensual/chartticketmensual.component';
 import { ChartticketanualComponent } from './components/chartticketanual/chartticketanual.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,8 @@ import { ChartticketanualComponent } from './components/chartticketanual/chartti
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule
+    ChartsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

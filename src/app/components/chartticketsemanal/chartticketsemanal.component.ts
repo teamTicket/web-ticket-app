@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { GetdataService } from '../../services/getdata.service';
 
 @Component({
   selector: 'app-chartticketsemanal',
@@ -10,6 +11,7 @@ import { Label } from 'ng2-charts';
 })
 export class ChartTicketSemanalComponent implements OnInit {
 
+  
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -41,12 +43,32 @@ export class ChartTicketSemanalComponent implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
+    { label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
+    { label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
+    { label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
   ];
 
-  constructor() { }
+  constructor(private chartData: GetdataService) {
+    this.barChartData=[
+      {data: [65, 59, 80, 81, 56, 55, 40]},
+      {data: [28, 48, 40, 19, 86, 27, 90]},
+      {data: [28, 48, 40, 19, 86, 27, 90]}
+    ]
+
+    chartData.getDataChartSemanal()
+      .subscribe( (resp) => {
+        console.log(resp);
+        // console.log(resp.data2);
+        // console.log(resp.data3);
+ 
+        // this.barChartData=[
+        //   {data: resp[0]},
+        //   {data: resp[1]},
+        //   {data: resp[2]}
+        // ]
+
+      });
+   }
 
   ngOnInit(): void {
   }

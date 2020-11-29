@@ -28,3 +28,7 @@
     max-width: 500px !important;
     max-height: 300px !important;
 }
+
+.alto {
+    height: 60vh;
+}

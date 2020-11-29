@@ -10,41 +10,31 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 })
 export class ChartpromedioatencionComponent implements OnInit {
 
+
+  dataChart: number[];
+
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Atención por día' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Núm. de Tickets atendido por día',lineTension: 0 },
  
   ];
   public lineChartLabels: Label[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+  public lineChartOptions: (ChartOptions) = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{}],
       yAxes: [{}]
     },
-    annotation: {
-      annotations: [
-        {
-          type: 'line',
-          mode: 'vertical',
-          scaleID: 'x-axis-0',
-          value: 'March',
-          borderColor: 'orange',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            fontColor: 'orange',
-            content: 'LineAnno'
-          }
-        },
-      ],
-    },
+    legend:{
+      display: false
+    }
+    
   };
   public lineChartColors: Color[] = [
 
     { // red
-      borderColor: 'blue',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      borderColor: '#A3A0FB',
+      pointBackgroundColor: '#FF8373',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
