@@ -1,9 +1,10 @@
 
 export class UsuarioModel{
 
-    id      : number;
+    id      : string;
     rol     : number;
     nombre  : string;
     apellido: string;
+    image?  : string;
 
 }

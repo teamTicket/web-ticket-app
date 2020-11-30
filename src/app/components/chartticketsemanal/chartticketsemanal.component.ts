@@ -3,6 +3,7 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { GetdataService } from '../../services/getdata.service';
+import { UsuarioModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-chartticketsemanal',
@@ -11,13 +12,18 @@ import { GetdataService } from '../../services/getdata.service';
 })
 export class ChartTicketSemanalComponent implements OnInit {
 
-  
+ 
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{
+    scales: { xAxes: [{
       gridLines: {
-        offsetGridLines: false
+        offsetGridLines: true
+    }
+    }], yAxes: [{
+
+      gridLines: {
+        offsetGridLines: true
     }
     }] },
     plugins: {
@@ -58,16 +64,9 @@ export class ChartTicketSemanalComponent implements OnInit {
     chartData.getDataChartSemanal()
       .subscribe( (resp) => {
         console.log(resp);
-        // console.log(resp.data2);
-        // console.log(resp.data3);
- 
-        // this.barChartData=[
-        //   {data: resp[0]},
-        //   {data: resp[1]},
-        //   {data: resp[2]}
-        // ]
-
+  
       });
+ 
    }
 
   ngOnInit(): void {

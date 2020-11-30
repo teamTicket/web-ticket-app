@@ -4,6 +4,7 @@ import { UsuarioModel } from '../models/user.model';
 import { ChartTicketModel } from '../models/chartticket.model';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,23 +25,25 @@ export class GetdataService {
    }
   getUsers(){
    
-    return this.http.get(`${this.url}/users.json`);
-            // .pipe( 
-            //  map( resp => this.crearArreglo(resp))
-            // );
+    return this.http.get(`${this.url}/users.json`)
+            .pipe( 
+             map( resp => this.crearArreglo(resp))
+            );
    }
 
-//  private crearArreglo(chartSemanalObj: Object){
+  private crearArreglo(UsuariosObj: Object){
 
-//    if ( chartSemanalObj === null){ return [];}
+    if ( UsuariosObj === null){ return [];}
 
-//   const chartsdatas: ChartTicketModel[] = [];
-//   Object.keys( chartSemanalObj ).forEach ( key => {
-//     const chartdata: ChartTicketModel = chartSemanalObj[key];
+    const usuarios: UsuarioModel[] = [];
+      Object.keys( UsuariosObj ).forEach ( key => {
 
-//     chartsdatas.push( chartdata );
-//   });
+        const usuario: UsuarioModel = UsuariosObj[key];
+        usuario.id = key;
 
-//   return chartsdatas;
-//   }
+        usuarios.push( usuario );
+    });
+
+    return usuarios;
+  }
 }

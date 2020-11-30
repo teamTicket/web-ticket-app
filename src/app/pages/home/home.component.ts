@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioModel } from 'src/app/models/user.model';
+import { GetdataService } from '../../services/getdata.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  usuarios: UsuarioModel[] = [];
+
   verChartSemanal: boolean;
   verChartMensual: boolean;
   verChartAnual  : boolean;
@@ -14,9 +18,16 @@ export class HomeComponent implements OnInit {
   chartSeleccionado: string;
 
 
-  constructor() { 
+  constructor(private dataUsers: GetdataService) { 
     this.verChartSemanal   = true;
     this.chartSeleccionado = "Semanal";
+
+    dataUsers.getUsers()
+    .subscribe( resp => {
+      console.log("usuarios:");
+      console.log(resp);
+      this.usuarios = resp;
+    });
   }
 
   ngOnInit(): void {
