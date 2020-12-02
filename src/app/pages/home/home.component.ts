@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioModel } from 'src/app/models/user.model';
 import { GetdataService } from '../../services/getdata.service';
+import { TicketModel } from '../../models/ticket.model';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { GetdataService } from '../../services/getdata.service';
 export class HomeComponent implements OnInit {
 
   usuarios: UsuarioModel[] = [];
+  tickets: TicketModel[] = [];
 
   verChartSemanal: boolean;
   verChartMensual: boolean;
@@ -27,6 +29,13 @@ export class HomeComponent implements OnInit {
       console.log("usuarios:");
       console.log(resp);
       this.usuarios = resp;
+    });
+
+    dataUsers.getTickets()
+    .subscribe( resp => {
+      console.log("tickets:");
+      console.log(resp);
+      this.tickets = resp;
     });
   }
 

@@ -97,7 +97,7 @@
                                 <tbody>
                                     <tr *ngFor="let usuario of usuarios" class="mb-4 mt-4">
                                         <td>
-                                            <img class="avatar-s mt-1 mb-2 mr-2" [src]="usuario.image" alt="imahen de usuario">
+                                            <img class="avatar-s mt-1 mb-2 mr-2" [src]="usuario.imagen" alt="imagen de usuario">
                                         </td>
                                         <td>{{usuario.nombre}} {{usuario.apellido}}</td>
                                     </tr>
@@ -117,17 +117,9 @@
                         </div>
                         <div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <small>#3434</small>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
-                                </li>
-                                <li class="list-group-item">
-                                    <small>#3434</small>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
-                                </li>
-                                <li class="list-group-item">
-                                    <small>#3434</small>
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisi</p>
+                                <li class="list-group-item" *ngFor="let ticket of tickets">
+                                    <small style="color: #D7DAE2;">Ticket #</small><small style="color: blue;">{{ticket.id}} </small>
+                                    <p>{{ticket.descripcion}}</p>
                                 </li>
                             </ul>
                         </div>

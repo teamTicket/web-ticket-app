@@ -5,6 +5,6 @@ export class UsuarioModel{
     rol     : number;
     nombre  : string;
     apellido: string;
-    image?  : string;
+    imagen?  : string;
 
 }
