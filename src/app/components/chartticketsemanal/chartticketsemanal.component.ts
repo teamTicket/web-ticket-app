@@ -3,7 +3,8 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { GetdataService } from '../../services/getdata.service';
-import { UsuarioModel } from '../../models/user.model';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-chartticketsemanal',
@@ -13,6 +14,7 @@ import { UsuarioModel } from '../../models/user.model';
 export class ChartTicketSemanalComponent implements OnInit {
 
  
+  
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -55,21 +57,26 @@ export class ChartTicketSemanalComponent implements OnInit {
   ];
 
   constructor(private chartData: GetdataService) {
-    this.barChartData=[
-      {data: [65, 59, 80, 81, 56, 55, 40]},
-      {data: [28, 48, 40, 19, 86, 27, 90]},
-      {data: [28, 48, 40, 19, 86, 27, 90]}
-    ]
-
+    // this.barChartData=[
+    //   {data: [65, 59, 80, 81, 56, 55, 40]},
+    //   {data: [28, 48, 40, 19, 86, 27, 90]},
+    //   {data: [28, 48, 40, 19, 86, 27, 90]}
+    // ]
+    
     chartData.getDataChartSemanal()
-      .subscribe( (resp) => {
-        console.log(resp);
-  
+    .subscribe( (resp: any[]=[]) => {
+      console.log("data semanal 0");
+      console.log(resp[0]);
+      this.barChartData[0].data = resp[0];
+      this.barChartData[1].data = resp[1];
+      this.barChartData[2].data = resp[2];
+      
       });
  
    }
 
   ngOnInit(): void {
+   
   }
 
   // events

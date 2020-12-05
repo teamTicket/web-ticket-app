@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../models/user.model';
 import { map } from 'rxjs/operators';
 import { TicketModel } from '../models/ticket.model';
-import { tick } from '@angular/core/testing';
 
 
 @Injectable({
@@ -11,16 +10,18 @@ import { tick } from '@angular/core/testing';
 })
 export class GetdataService {
 
-  url = "https://ticket-app-69006.firebaseio.com";
+  url: string = "https://ticket-app-69006.firebaseio.com";
 
   usuario = new UsuarioModel();
-  ticket = new TicketModel();
+  ticket  = new TicketModel();
 
   constructor(private http: HttpClient) {}
 
   getDataChartSemanal(){
    
-    return this.http.get(`${this.url}/chartticketsemanal.json`);
+    return this.http.get(`${this.url}/datacharts/datasemanal.json`)
+      .pipe(map(res => res));
+
   }
   getUsers(){
    
@@ -53,7 +54,6 @@ export class GetdataService {
 
     return usuarios;
   }
-
   private crearArregloTickets(TicketsObj: Object){
 
     if ( TicketsObj === null){ return [];}
@@ -70,4 +70,17 @@ export class GetdataService {
     return tickets;
   }
 
+  private arregloData(arrayAPI: Object){
+
+    if (arrayAPI === null){return [];}
+
+    const arrayFiltrado: number[] = [];
+    Object.keys(arrayAPI).forEach( key => {
+      const dataArray: number = arrayAPI[key];
+      arrayFiltrado.push(dataArray);
+    });
+
+    return arrayFiltrado;
+
+  }
 }
