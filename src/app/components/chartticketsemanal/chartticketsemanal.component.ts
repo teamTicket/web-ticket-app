@@ -3,8 +3,6 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { GetdataService } from '../../services/getdata.service';
-import { map } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-chartticketsemanal',
@@ -13,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class ChartTicketSemanalComponent implements OnInit {
 
- 
+  private rutaDataSemanal: string = "/datacharts.json";
   
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -51,32 +49,30 @@ export class ChartTicketSemanalComponent implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
-    { label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
-    { label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
+    { data: [], label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
+    { data: [], label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
+    { data: [], label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
   ];
 
   constructor(private chartData: GetdataService) {
-    // this.barChartData=[
-    //   {data: [65, 59, 80, 81, 56, 55, 40]},
-    //   {data: [28, 48, 40, 19, 86, 27, 90]},
-    //   {data: [28, 48, 40, 19, 86, 27, 90]}
-    // ]
-    
-    chartData.getDataChartSemanal()
-    .subscribe( (resp: any[]=[]) => {
-      console.log("data semanal 0");
-      console.log(resp[0]);
-      this.barChartData[0].data = resp[0];
-      this.barChartData[1].data = resp[1];
-      this.barChartData[2].data = resp[2];
-      
+    this.chartData.getDataChart(this.rutaDataSemanal)
+    .subscribe( (datachart: any) => {
+      console.log("respuesta:", datachart);
+      const data_abierto   = datachart["abierto"].map( datachart => datachart);
+      const data_cerrado   = datachart["cerrado"].map( datachart => datachart);
+      const data_pendiente = datachart["pendiente"].map( datachart => datachart);
+
+      this.barChartData=[
+        {data: data_abierto},
+        {data: data_cerrado},
+        {data: data_pendiente}
+      ]
+      this.barChartData;
+      console.log("this.barChartData",this.barChartData);
       });
- 
    }
 
   ngOnInit(): void {
-   
   }
 
   // events

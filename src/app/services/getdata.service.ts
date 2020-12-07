@@ -17,18 +17,17 @@ export class GetdataService {
 
   constructor(private http: HttpClient) {}
 
-  getDataChartSemanal(){
+  getDataChart(ruta: string){
    
-    return this.http.get(`${this.url}/datacharts/datasemanal.json`)
-      .pipe(map(res => res));
+    return this.http.get(`${this.url}${ruta}`);
 
   }
   getUsers(){
    
     return this.http.get(`${this.url}/users.json`)
-            .pipe( 
-             map( resp => this.crearArreglo(resp))
-            );
+      .pipe( 
+       map( resp => this.crearArreglo(resp))
+      );
   }
 
   getTickets(){
@@ -70,17 +69,4 @@ export class GetdataService {
     return tickets;
   }
 
-  private arregloData(arrayAPI: Object){
-
-    if (arrayAPI === null){return [];}
-
-    const arrayFiltrado: number[] = [];
-    Object.keys(arrayAPI).forEach( key => {
-      const dataArray: number = arrayAPI[key];
-      arrayFiltrado.push(dataArray);
-    });
-
-    return arrayFiltrado;
-
-  }
 }
