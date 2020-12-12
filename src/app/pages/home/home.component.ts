@@ -26,15 +26,11 @@ export class HomeComponent implements OnInit {
 
     dataUsers.getUsers()
     .subscribe( resp => {
-      console.log("usuarios:");
-      console.log(resp);
       this.usuarios = resp;
     });
 
     dataUsers.getTickets()
     .subscribe( resp => {
-      console.log("tickets:");
-      console.log(resp);
       this.tickets = resp;
     });
   }

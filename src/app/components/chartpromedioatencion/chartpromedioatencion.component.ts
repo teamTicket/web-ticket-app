@@ -52,10 +52,10 @@ export class ChartpromedioatencionComponent implements OnInit {
   constructor(private chartData: GetdataService) { 
     this.chartData.getDataChart(this.rutaDataPromedio)
       .subscribe((datachart: any) => {
-          const dataResuesta = datachart.datos;
+          const dataRespuesta = datachart.datos;
 
           this.lineChartData=[
-            {data: dataResuesta, label: 'Núm. de Tickets atendido por día', lineTension: 0}
+            {data: dataRespuesta, label: 'Núm. de Tickets atendido por día', lineTension: 0}
           ]
       });
   }

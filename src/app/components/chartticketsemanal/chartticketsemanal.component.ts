@@ -57,7 +57,7 @@ export class ChartTicketSemanalComponent implements OnInit {
   constructor(private chartData: GetdataService) {
     this.chartData.getDataChart(this.rutaDataSemanal)
     .subscribe( (datachart: any) => {
-      console.log("respuesta:", datachart);
+  
       const data_abierto   = datachart.abierto;
       const data_cerrado   = datachart.cerrado;
       const data_pendiente = datachart.pendiente;
@@ -67,8 +67,6 @@ export class ChartTicketSemanalComponent implements OnInit {
         {data: data_cerrado, label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
         {data: data_pendiente, label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
       ]
-     // this.barChartData;
-      console.log("this.barChartData",this.barChartData);
       });
    }
 
