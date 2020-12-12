@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { GetdataService } from '../../services/getdata.service';
 
 @Component({
   selector: 'app-chartticketmensual',
@@ -10,6 +11,7 @@ import { Label } from 'ng2-charts';
 })
 export class ChartticketmensualComponent implements OnInit {
 
+  private rutaDataMensual: string ='/datacharts/mensual.json';
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -41,12 +43,26 @@ export class ChartticketmensualComponent implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40], label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
-    { data: [28, 48, 40, 19, 86, 27, 90, 40, 19, 86, 27, 90], label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
-    { data: [28, 48, 40, 19, 86, 27, 90, 40, 19, 86, 27, 90], label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
+    { data: [], label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
+    { data: [], label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
+    { data: [], label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
   ];
 
-  constructor() { }
+  constructor(private chartData: GetdataService) { 
+
+    this.chartData.getDataChart(this.rutaDataMensual)
+    .subscribe( (datachart: any) => {
+      const data_abierto   = datachart.abierto;
+      const data_cerrado   = datachart.cerrado;
+      const data_pendiente = datachart.pendiente;
+
+      this.barChartData=[
+        {data: data_abierto, label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
+        {data: data_cerrado, label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
+        {data: data_pendiente, label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
+      ]
+      });
+  }
 
   ngOnInit(): void {
   }

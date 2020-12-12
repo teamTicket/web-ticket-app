@@ -49,25 +49,25 @@ export class ChartTicketSemanalComponent implements OnInit {
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [], label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
-    { data: [], label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
-    { data: [], label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
+    { data: [], label:'', backgroundColor:'', hoverBackgroundColor:''},
+    { data: [], label:'', backgroundColor:'', hoverBackgroundColor:''},
+    { data: [], label:'', backgroundColor:'', hoverBackgroundColor:''}
   ];
 
   constructor(private chartData: GetdataService) {
     this.chartData.getDataChart(this.rutaDataSemanal)
     .subscribe( (datachart: any) => {
       console.log("respuesta:", datachart);
-      const data_abierto   = datachart["abierto"].map( datachart => datachart);
-      const data_cerrado   = datachart["cerrado"].map( datachart => datachart);
-      const data_pendiente = datachart["pendiente"].map( datachart => datachart);
+      const data_abierto   = datachart.abierto;
+      const data_cerrado   = datachart.cerrado;
+      const data_pendiente = datachart.pendiente;
 
       this.barChartData=[
-        {data: data_abierto},
-        {data: data_cerrado},
-        {data: data_pendiente}
+        {data: data_abierto, label: 'Abierto'   , backgroundColor: '#FFDA83', hoverBackgroundColor: '#FFDA83'},
+        {data: data_cerrado, label: 'Cerrado'   , backgroundColor: '#56D9FE', hoverBackgroundColor: '#56D9FE'},
+        {data: data_pendiente, label: 'Pendientes', backgroundColor: '#FF8373', hoverBackgroundColor: '#FF8373'}
       ]
-      this.barChartData;
+     // this.barChartData;
       console.log("this.barChartData",this.barChartData);
       });
    }

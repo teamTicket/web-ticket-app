@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { GetdataService } from '../../services/getdata.service';
 
 @Component({
   selector: 'app-chartpromedioatencion',
@@ -13,8 +14,10 @@ export class ChartpromedioatencionComponent implements OnInit {
 
   dataChart: number[];
 
+  private rutaDataPromedio: string ="/promedio_atencion.json";
+
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Núm. de Tickets atendido por día',lineTension: 0 },
+    { data: [], label: 'Núm. de Tickets atendido por día', lineTension: 0 },
  
   ];
   public lineChartLabels: Label[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -46,7 +49,16 @@ export class ChartpromedioatencionComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+  constructor(private chartData: GetdataService) { 
+    this.chartData.getDataChart(this.rutaDataPromedio)
+      .subscribe((datachart: any) => {
+          const dataResuesta = datachart.datos;
+
+          this.lineChartData=[
+            {data: dataResuesta, label: 'Núm. de Tickets atendido por día', lineTension: 0}
+          ]
+      });
+  }
 
   ngOnInit(): void {
   }

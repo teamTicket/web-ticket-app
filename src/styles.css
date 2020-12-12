@@ -32,3 +32,11 @@
 .alto {
     height: 60vh;
 }
+
+body {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+h1 {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
