@@ -52,6 +52,8 @@
 .no-border {
     border-bottom: none !important;
     border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
 }
 
 .text-blue {
@@ -81,4 +83,68 @@
     color: #4D4F5C;
     font-size: 13px;
     text-decoration: none;
+}
+
+.alto {
+    height: 100vh;
+}
+
+#titulo-us {
+    font-size: 25px !important;
+    margin-left: 1rem;
+}
+
+.ancho-btn {
+    min-width: 30px !important;
+}
+
+.btn-margin {
+    margin-left: -38px !important;
+}
+
+.col-margin {
+    border-right: #D6D6D7 1px solid !important;
+    height: 78vh;
+}
+
+.contenedor {
+    display: flex;
+    background-color: #0E294B !important;
+    position: relative !important;
+    right: 70px;
+}
+
+.avatar-m {
+    max-width: 94px;
+}
+
+.nb {
+    border: none !important;
+}
+
+.user-box-form {
+    background-color: #F3F3F3 !important;
+    border-radius: 0px;
+    border: none !important;
+    border-bottom: #BCBCCB 2px solid !important;
+}
+
+.sm-txt {
+    font-size: 10px !important;
+    color: #4D565C !important;
+}
+
+.btn-save {
+    background-color: #56D9FE !important;
+    color: white !important;
+}
+
+.btn-cancel {
+    background-color: #fd0054 !important;
+    border-color: #fd0054 !important;
+    color: white !important;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
 }

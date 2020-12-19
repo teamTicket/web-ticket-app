@@ -14,6 +14,7 @@ import { ChartticketmensualComponent } from './components/chartticketmensual/cha
 import { ChartticketanualComponent } from './components/chartticketanual/chartticketanual.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     ChartpromedioatencionComponent,
     ChartticketmensualComponent,
-    ChartticketanualComponent
+    ChartticketanualComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

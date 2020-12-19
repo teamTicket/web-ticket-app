@@ -4,13 +4,18 @@
 
 .wh {
     width: 15rem;
+    padding-right: 30px;
 }
 
 .bg {
-    background-color: #FCFCFC;
+    background-color: #FCFCFC !important;
 }
 
 .button-bg {
-    background-color: #0E294B;
-    border-color: #0E294B;
+    background-color: #0E294B !important;
+    border-color: #0E294B !important;
+}
+
+.arrow {
+    color: white !important;
 }
