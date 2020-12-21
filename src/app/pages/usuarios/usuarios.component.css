@@ -125,8 +125,8 @@
 .user-box-form {
     background-color: #F3F3F3 !important;
     border-radius: 0px;
-    border: none !important;
-    border-bottom: #BCBCCB 2px solid !important;
+    border: none;
+    border-bottom: #BCBCCB 2px solid;
 }
 
 .sm-txt {
@@ -147,4 +147,16 @@
 
 .dropdown-toggle::after {
     display: none !important;
+}
+
+
+/* clases para las validaciones de formularios */
+
+.is-valid {
+    border: #fd0054 2px solid !important;
+    box-shadow: #fd0054 !important;
+}
+
+.text-small {
+    font-size: 10px;
 }

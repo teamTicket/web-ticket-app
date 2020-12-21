@@ -1,5 +1,4 @@
 <div class="d-flex" id="wrapper">
-
     <!-- Sidebar -->
     <div class="bg border-right" id="sidebar-wrapper">
         <div class="sidebar-heading text-white">Logo</div>
@@ -21,25 +20,25 @@
         </div>
 
         <div class="container-fluid bg-g">
-
             <div class="card alto mt-5 mb-5 ml-4 mr-4 shadow p-3 mb-5 bg-white rounded">
                 <!-- <div class="card-header  no-border bg-g">
                     Featured
                 </div> -->
                 <div class="card-head">
                     <div class="row mt-4 ml-2">
-
                         <div class="col-auto">
                             <p id="titulo-us">Usuarios</p>
                         </div>
                         <div class="col"></div>
                         <div class="col-auto">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary">{{tipoUsuario}}</button>
+                                <button type="button" class="btn btn-primary">
+                  {{ tipoUsuario }}
+                </button>
                                 <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-chevron-down"></i>
-                                <span class="sr-only">Toggle Dropdown</span>
-                                </button>
+                  <i class="fas fa-chevron-down"></i>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item">Administrador</a>
                                     <a class="dropdown-item">Usuario N</a>
@@ -50,63 +49,94 @@
                     </div>
                 </div>
                 <div class="card-body">
-
                     <div class="row">
                         <div class="col-3 col-margin mt-3">
                             <div>
                                 <div class="d-sm-block">
                                     <form class="form-inline d-inline-block position-relative">
-
-                                        <input class="form-control" type="text" placeholder="Buscar Usuario" aria-label="Search">
-                                        <button class="btn btn-search position-absolute btn-margin" (click)="buscarUsuario()"><i class="fas fa-search text-grey"></i></button>
+                                        <input class="form-control" type="text" placeholder="Buscar Usuario" aria-label="Search" />
+                                        <button class="btn btn-search position-absolute btn-margin" (click)="buscarUsuario()">
+                      <i class="fas fa-search text-grey"></i>
+                    </button>
                                     </form>
                                 </div>
 
                                 <div class="mt-4">
                                     <ul class="list-group">
-                                        <li class="list-group-item no-border" *ngFor="let usuario of usuarios"> {{usuario.nombre}} {{usuario.apellido}} </li>
-
+                                        <li class="list-group-item no-border" *ngFor="let usuario of usuarios">
+                                            {{ usuario.nombre }} {{ usuario.apellido }}
+                                        </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-7 mb-3">
-                            <div class="card shadow-sm p-3 mb-4 bg-white rounded" style="height: 80vh;">
-                                <form>
+                            <div class="card shadow-sm p-3 mb-4 bg-white rounded" style="height: 80vh">
+                                <form [formGroup]="formulario" (ngSubmit)="guardar()">
                                     <div class="container form-row">
                                         <div class="col">
                                             <div class="card nb">
                                                 <div class="card-body d-flex justify-content-center">
-                                                    <a><img class="img-fluid avatar-m" src="../../../assets/img/dafault.png" alt="default user"></a>
+                                                    <a><img class="img-fluid avatar-m" src="../../../assets/img/dafault.png" alt="default user" /></a>
                                                 </div>
                                             </div>
-                                            <small class="sm-txt">Apellido Paterno</small>
-                                            <input type="text" class="form-control user-box-form shadow mb-5" placeholder="">
 
-                                            <small class="sm-txt">Perfil</small>
-                                            <input type="text" class="form-control user-box-form shadow mb-5" placeholder="">
+                                            <div class=" mb-5">
+                                                <small class="sm-txt">Apellido Paterno</small>
+                                                <input type="text" class="form-control user-box-form shadow" formControlName="apellidoPaterno" [class.is-invalid]="apellidoPNoValido" />
+                                                <small *ngIf="apellidoPNoValido" class="text-danger text-small">
+                                                  El Apellido es obligatorio
+                                                </small>
+                                            </div>
+                                            <div class="mb-5">
+                                                <small class="sm-txt">Perfil</small>
+                                                <input type="text" class="form-control user-box-form shadow" formControlName="perfil" [class.is-invalid]="perfilNoValido" />
+                                                <small *ngIf="perfilNoValido" class="text-danger text-small">
+                                                    El Perfil es obligatorio
+                                                </small>
+                                            </div>
                                         </div>
                                         <div class="col">
-                                            <div class="mt-4">
+                                            <div class="mt-4 mb-5">
                                                 <small class="sm-txt">Nombre(s)</small>
-                                                <input type="text" class="form-control user-box-form shadow mb-5" placeholder="">
+                                                <input type="text" class="form-control user-box-form shadow" formControlName="nombre" [class.is-invalid]="NombreNoValido" />
+                                                <small *ngIf="NombreNoValido" class="text-danger text-small">
+                                                    Nombre(s) es obligatorio
+                                                </small>
                                             </div>
 
-                                            <small class="sm-txt">Apellido Materno</small>
-                                            <input type="text" class="form-control user-box-form shadow mb-5" placeholder="">
+                                            <div class="mb-5">
+                                                <small class="sm-txt">Apellido Materno</small>
+                                                <input type="text" class="form-control user-box-form shadow" formControlName="apellidoMaterno" [class.is-invalid]="apellidoMNoValido" />
+                                                <small *ngIf="apellidoMNoValido" class="text-danger text-small">
+                                                    El Apellido es obligatorio
+                                                </small>
+                                            </div>
 
-                                            <small class="sm-txt">Correo</small>
-                                            <input type="email" class="form-control user-box-form shadow mb-5" placeholder="">
+                                            <div class="mb-5">
+                                                <small class="sm-txt">Correo</small>
+                                                <input type="email" class="form-control user-box-form shadow" formControlName="correo" [class.is-invalid]="correoNoValido" />
+                                                <small *ngIf="correoNoValido" class="text-danger text-small">
+                                                    El Correo es obligatorio
+                                                </small>
+                                            </div>
 
-                                            <small class="sm-txt">Alias</small>
-                                            <input type="text" class="form-control user-box-form shadow mb-5" placeholder="">
+                                            <div class="mb-5">
+                                                <small class="sm-txt">Alias</small>
+                                                <input type="text" class="form-control user-box-form shadow" formControlName="alias" [class.is-invalid]="AliasNoValido" />
+                                                <small *ngIf="AliasNoValido" class="text-danger text-small">
+                                                    El Alias es obligatorio
+                                                </small>
+                                            </div>
                                         </div>
-
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" disabled class="btn btn-info mr-2">Guardar</button>
-                                        <button type="button" disabled class="btn btn-danger">Cancelar</button>
+                                        <button type="button" [disabled]="nodata" class="btn btn-info mr-2" (click)="guardar()">
+                                           Guardar
+                                        </button>
+                                        <button type="button" [disabled]="nodata" class="btn btn-danger">
+                                           Cancelar
+                                        </button>
                                     </div>
                                 </form>
                             </div>

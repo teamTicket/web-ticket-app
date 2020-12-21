@@ -16,6 +16,8 @@ import { ChartticketanualComponent } from './components/chartticketanual/chartti
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,9 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
