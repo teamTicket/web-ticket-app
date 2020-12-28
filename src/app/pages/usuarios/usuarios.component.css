@@ -160,3 +160,23 @@
 .text-small {
     font-size: 10px;
 }
+
+
+/* Clase para el estilo de botón de selección de usuario */
+
+.btn-user-select {
+    color: #56D9FE;
+    border-radius: 0;
+    box-shadow: 1px 1px 3px #4D4F5C
+}
+
+
+/* clase para el dropdown add user */
+
+.dropdown-add-delete {
+    color: black !important;
+}
+
+.dropdown-icon {
+    color: black !important;
+}

@@ -46,7 +46,7 @@ export class GetdataService {
       Object.keys( UsuariosObj ).forEach ( key => {
 
         const usuario: UsuarioModel = UsuariosObj[key];
-        usuario.id = key;
+      //  usuario.id = key;
 
         usuarios.push( usuario );
     });

@@ -15,6 +15,7 @@ export class UsuariosComponent implements OnInit {
   formulario: FormGroup;
 
   nodata: boolean;
+  ImagenUsuario: string;
   constructor(private dataUsers: GetdataService,
               private fb       : FormBuilder
               ) { 
@@ -51,13 +52,52 @@ export class UsuariosComponent implements OnInit {
     console.log("busqueda");
   }
 
+  seleccionUsuario(){
+  }
   obtenerUsuarios(){
 
-    this.dataUsers.getUsers().subscribe( resp => this.usuarios = resp);
+    this.dataUsers.getUsers().subscribe( (resp: UsuarioModel[]) => this.usuarios = resp);
+  }
+
+  cargarDataUsuario(usuario: UsuarioModel){
+    console.log(usuario);
+    this.nodata = false;
+
+    this.formulario.reset({
+      nombre         : usuario.nombre,
+      apellidoPaterno: usuario.apellido
+    })
+    this.ImagenUsuario = usuario.imagen;
   }
 
   guardar(){
+    // aquí se implementa un POST para enviar la data a la base de datos
+
+    // instrucciones POST
+    // ...
     console.log(this.formulario);
+    
+    if ( this.formulario.invalid ) {
+
+      return Object.values( this.formulario.controls ).forEach( control => {
+        if ( control instanceof FormGroup ) {
+          Object.values( control.controls ).forEach( control => control.markAsTouched() );
+        } else {
+          control.markAsTouched();
+        }
+      });
+    }
+  }
+  cancelar(){
+    this.nodata = true;
+    this.formulario.reset({
+      nombre         : "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      correo         : "",
+      alias          : "",
+      perfil         : ""
+    })
   }
 
   crearFormulario(){
@@ -71,11 +111,23 @@ export class UsuariosComponent implements OnInit {
       perfil         : ['',[ Validators.required ]]
     });
   }
+  nuevoUsuario(){
+    this.nodata = false;
+    this.ImagenUsuario ="../../../assets/img/dafault.png";
 
-  cargarDataAlFormulario(){
     this.formulario.reset({
-      nombre: 'Joel'
+      nombre         : "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      correo         : "",
+      alias          : "",
+      perfil         : ""
     })
+    
+  }
+  
+  eliminarUsuario(){
+
   }
 
 }
