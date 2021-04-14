@@ -19,3 +19,11 @@
 .arrow {
     color: white !important;
 }
+
+#navbarDropdown {
+    margin-top: 10px !important;
+}
+
+.bell {
+    margin-top: 10px !important;
+}

@@ -1,0 +1,12 @@
+.dropdown-menu {
+    margin-left: -120px;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: rgb(192, 229, 250);
+}
+
+.btn {
+    border: 1px solid #D7DAE2;
+    color: #4D4F5C;
+    font-size: 11px;
+}

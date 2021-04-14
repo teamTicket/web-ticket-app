@@ -1,0 +1,30 @@
+<div class="titulo-card">
+    <div class="selector">
+        <h4>Ticket</h4>
+    </div>
+    <div class="selector">
+        <div class="btn-group">
+            <button type="button" class="btn">{{this.chartSeleccionado}}</button>
+            <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="semanalSeleccionado()">Semanal</a>
+                <a class="dropdown-item" (click)="mensualSeleccionado()">Mensual</a>
+                <a class="dropdown-item" (click)="anualSeleccionado()">Anual</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="labels">
+    <ul>
+        <li><i class="fas fa-dot-circle abierto"></i> Abierto</li>
+        <li><i class="fas fa-dot-circle cerrado"></i> Cerrado</li>
+        <li><i class="fas fa-dot-circle pendiente"></i> Pendiente</li>
+    </ul>
+</div>
+<div class="cuerpo-card">
+    <app-chartticketsemanal *ngIf="verChartSemanal"></app-chartticketsemanal>
+    <app-chartticketmensual *ngIf="verChartMensual"></app-chartticketmensual>
+    <app-chartticketanual *ngIf="verChartAnual"></app-chartticketanual>
+</div>

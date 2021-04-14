@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  alerta = true;
+  toggleExpand: string;
+  constructor() {
+    this.toggle(this.alerta);
+  }
 
   ngOnInit(): void {
   }
 
+  toggle(valor: boolean){
+    if (valor) {
+      this.toggleExpand = 'expandir';
+    } else {
+      this.toggleExpand = 'contraer';
+    }
+  }
 }

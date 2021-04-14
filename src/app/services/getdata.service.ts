@@ -22,6 +22,7 @@ export class GetdataService {
     return this.http.get(`${this.url}${ruta}`);
 
   }
+
   getUsers(){
    
     return this.http.get(`${this.url}/users.json`)
@@ -38,6 +39,7 @@ export class GetdataService {
     );
 
   }
+
   private crearArreglo(UsuariosObj: Object){
 
     if ( UsuariosObj === null){ return [];}
@@ -53,6 +55,7 @@ export class GetdataService {
 
     return usuarios;
   }
+  
   private crearArregloTickets(TicketsObj: Object){
 
     if ( TicketsObj === null){ return [];}

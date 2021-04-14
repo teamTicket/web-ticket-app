@@ -1,173 +1,128 @@
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar -->
-    <div class="bg border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading text-white">Logo</div>
+<nav>
+    <app-navbar></app-navbar>
+</nav>
 
-        <div class="list-group list-group-flush">
-            <a [routerLink]="['/home']" routerLinkActive="text-blue" class="list-group-item list-group-item-action bg text-white no-border">
-                <i class="fas fa-home"></i> Home</a>
+<aside>
+    <app-sidebar></app-sidebar>
+</aside>
 
-            <a [routerLink]="['/usuarios']" routerLinkActive="text-blue" class="list-group-item list-group-item-action bg no-border">
-                <i class="far fa-user"></i> Usuarios</a>
+<section id="main-card">
+    <div class="card-top">
+        <h4>Usuarios</h4>
+        <div>
+            <select id="tipo-usuario">
+                <!-- <option value="" disabled selected>--Seleccione--</option> -->
+                <option value="Administrador">Administrador</option>
+                <option value="Soporte">Soporte</option>
+            </select>
         </div>
     </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div>
-            <app-navbar></app-navbar>
+    <div class="card-content">
+        <div class="busqueda-usuarios">
+            <div class="input-search">
+                <input type="search" name="" id="" placeholder="Buscar usuario">
+                <button class="btn" (click)="buscarUsuario()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <ul>
+                <li *ngFor="let usuario of usuarios; let i=index" (click)="cargarDataUsuario(usuario,i)"> {{usuario.nombre}} {{usuario.apellido}} </li>
+            </ul>
         </div>
+        <!-- Main card form -->
+        <div class="card-form">
+            <form [formGroup]="formulario" (ngSubmit)="guardar()">
+                <div class="img-form">
+                    <img *ngIf="nodata" src="../../../assets/img/dafault.png" alt="">
+                    <img *ngIf="!nodata" [src]="this.ImagenUsuario" alt="default user" />
+                </div>
 
-        <div class="container-fluid bg-g">
-            <div class="card alto mt-5 mb-5 ml-4 mr-4 shadow p-3 mb-5 bg-white rounded">
-                <!-- <div class="card-header  no-border bg-g">
-                    Featured
-                </div> -->
-                <div class="card-head">
-                    <div class="row mt-4 ml-2">
-                        <div class="col-auto">
-                            <p id="titulo-us">Usuarios</p>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col-auto">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary">
-                                 {{ tipoUsuario }}
-                                </button>
-                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-chevron-down"></i>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item">Administrador</a>
-                                    <a class="dropdown-item">Usuario N</a>
-                                    <a class="dropdown-item">Usuario</a>
-                                </div>
-                            </div>
+                <div class="form-input">
+                    <small class="sm-txt">Nombre(s)</small>
+                    <div>
+                        <input type="text" class="box-form" formControlName="nombre" [class.is-invalid]="NombreNoValido" />
+                        <div>
+                            <small *ngIf="NombreNoValido" class="text-danger">
+                                El Nombre es obligatorio
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-3 col-margin mt-3">
-                            <div class="">
-                                <form class="form-inline d-inline-block position-relative">
-                                    <input class="form-control" type="text" placeholder="Buscar Usuario" aria-label="Search" />
-                                    <button class="btn btn-search position-absolute btn-margin" (click)="buscarUsuario()">
-                                        <i class="fas fa-search text-grey"></i>
-                                    </button>
-                                </form>
-                            </div>
 
-                            <div class="mt-4">
-                                <ul class="list-group">
-                                    <li class="list-group-item no-border" *ngFor="let usuario of usuarios; let i=index">
-                                        <button type="button" class="btn btn-block" (click)="cargarDataUsuario(usuario,i)">
-
-                                            {{ usuario.nombre }} {{ usuario.apellido }}
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+                <div class="form-input">
+                    <small class="sm-txt">Apellido Paterno</small>
+                    <div>
+                        <input type="text" formControlName="apellidoPaterno" [class.is-invalid]="apellidoPNoValido" class="box-form" />
+                        <div>
+                            <small *ngIf="apellidoPNoValido" class="text-danger">
+                                El Apellido Paterno es obligatorio
+                            </small>
                         </div>
-                        <div class="col-7 mb-3">
-                            <div class="card shadow-sm p-3 mb-4 bg-white rounded" style="height: 80vh">
-                                <form [formGroup]="formulario" (ngSubmit)="guardar()">
-                                    <div class="container form-row">
-                                        <div class="col">
-                                            <div class="card nb">
-
-                                                <div class="card-body d-flex justify-content-center">
-                                                    <a *ngIf="nodata"><img class="img-fluid avatar-m" src="../../../assets/img/dafault.png" alt="default user" /></a>
-                                                    <a *ngIf="!nodata"><img class="img-fluid avatar-m" [src]="this.ImagenUsuario" alt="default user" /></a>
-                                                </div>
-                                            </div>
-
-                                            <div class=" mb-5">
-                                                <small class="sm-txt">Apellido Paterno</small>
-                                                <input type="text" class="form-control user-box-form shadow" formControlName="apellidoPaterno" [class.is-invalid]="apellidoPNoValido" />
-                                                <small *ngIf="apellidoPNoValido" class="text-danger text-small">
-                                                  El Apellido es obligatorio
-                                                </small>
-                                            </div>
-                                            <div class="mb-5">
-                                                <small class="sm-txt">Perfil</small>
-                                                <!-- Optición de selecccion de perfil -->
-                                                <!-- <input type="option" class="form-control user-box-form shadow" formControlName="perfil" [class.is-invalid]="perfilNoValido" /> -->
-                                                <select class="form-control user-box-form shadow " formControlName="perfil" [class.is-invalid]="perfilNoValido">
-                                                    <option value="Administrador"> Administrador </option>
-                                                    <option value="Soporte"> Soporte </option>
-                                                    <option value="" selected disabled hidden> Seleccione tipo </option>
-                                                </select>
-                                                <small *ngIf="perfilNoValido" class="text-danger text-small">
-                                                    El Perfil es obligatorio
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="mt-4 mb-5">
-                                                <small class="sm-txt">Nombre(s)</small>
-                                                <input type="text" class="form-control user-box-form shadow" formControlName="nombre" [class.is-invalid]="NombreNoValido" />
-                                                <small *ngIf="NombreNoValido" class="text-danger text-small">
-                                                    Nombre(s) es obligatorio
-                                                </small>
-                                            </div>
-
-                                            <div class="mb-5">
-                                                <small class="sm-txt">Apellido Materno</small>
-                                                <input type="text" class="form-control user-box-form shadow" formControlName="apellidoMaterno" [class.is-invalid]="apellidoMNoValido" />
-                                                <small *ngIf="apellidoMNoValido" class="text-danger text-small">
-                                                    El Apellido es obligatorio
-                                                </small>
-                                            </div>
-
-                                            <div class="mb-5">
-                                                <small class="sm-txt">Correo</small>
-                                                <input type="email" class="form-control user-box-form shadow" formControlName="correo" [class.is-invalid]="correoNoValido" />
-                                                <small *ngIf="correoNoValido" class="text-danger text-small">
-                                                    El Correo es obligatorio
-                                                </small>
-                                            </div>
-
-                                            <div class="mb-5">
-                                                <small class="sm-txt">Alias</small>
-                                                <input type="text" class="form-control user-box-form shadow" formControlName="alias" [class.is-invalid]="AliasNoValido" />
-                                                <small *ngIf="AliasNoValido" class="text-danger text-small">
-                                                    El Alias es obligatorio
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <!-- dropdown agreggar/eliminar usuario -->
-                                            <div class="dropdown d-flex justify-content-end dropdown-add-delete">
-                                                <button class="btn btn-primary dropdown-toggle nb" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v dropdown-icon"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                    <button class="dropdown-item" type="button" (click)="nuevoUsuario()">Nuevo Usuario</button>
-                                                    <button class="dropdown-item" type="button" [disabled]="nodata" (click)="eliminarUsuario()">Eliminar Usuario</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="button" [disabled]="nodata" class="btn btn-info mr-2" (click)="guardar()">
-                                           Guardar
-                                        </button>
-                                        <button type="button" [disabled]="nodata" class="btn btn-danger" (click)="cancelar()">
-                                           Cancelar
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-2"></div>
                     </div>
                 </div>
+
+                <div class="form-input">
+                    <small class="sm-txt">Apellido Materno</small>
+                    <div>
+                        <input type="text" formControlName="apellidoMaterno" [class.is-invalid]="apellidoMNoValido" class="box-form" />
+                        <div>
+                            <small *ngIf="apellidoMNoValido" class="text-danger">
+                              El Apellido Materno es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-input">
+                    <small class="sm-txt">Correo</small>
+                    <div>
+                        <input type="email" formControlName="correo" [class.-is-invalid]="correoNoValido" class="box-form" />
+                        <div>
+                            <small *ngIf="correoNoValido" class="text-danger">
+                                El Correo es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-input">
+                    <small class="sm-txt">Perfil</small>
+                    <div>
+                        <select class="box-form-select" formControlName="perfil" [class.is-invalid]="perfilNoValido">
+                            <option value="Administrador"> Administrador </option>
+                            <option value="Soporte"> Soporte </option>
+                            <option value="" selected disabled hidden> Seleccione tipo </option>
+                       
+                        </select>
+                        <div>
+                            <small *ngIf="perfilNoValido" class="text-danger">
+                               El Perfil es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-input">
+                    <small class="sm-txt">Alias</small>
+                    <div>
+                        <input type="text" formControlName="alias" class="box-form" />
+                        <div>
+                            <small *ngIf="AliasNoValido" class="text-danger">
+                               El Alias es obligatorio
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="btn-form">
+                <button [disabled]="nodata" (click)="guardar()" class="btn btn-success">Guardar</button>
+                <button [disabled]="nodata" (click)="cancelar()" class="btn btn-danger">Cancelar</button>
             </div>
         </div>
+        <!-- End main card form -->
     </div>
-    <!-- /#page-content-wrapper -->
-    <!-- Menu Toggle Script -->
-</div>
+
+</section>

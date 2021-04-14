@@ -12,7 +12,7 @@ export class ChartClientesComponent implements OnInit {
 
   public rutaDataClientes: string = '/clientes.json';
  // Doughnut
-public doughnutChartLabels: Label[] = ['Clientes Platino', 'Clientes VIP', 'Clientes Intermedio', 'Clientes Base'];
+public doughnutChartLabels: Label[] = ['Platino', 'VIP', 'Intermedio', 'Base'];
 
 public doughnutChartData: ChartDataSets[] = [
   { data: [], backgroundColor: ['#55D8FE', '#FF8373', '#FFDA83', '#A3A0FB'], hoverBackgroundColor: ['#55D8FE', '#FF8373', '#FFDA83', '#A3A0FB']}
@@ -20,7 +20,7 @@ public doughnutChartData: ChartDataSets[] = [
  public doughnutChartOptions: ChartOptions = {
   responsive: true,
   legend:{
-    position: "top"
+    position: "right"
   }
  }
  public doughnutChartType: ChartType = 'doughnut';

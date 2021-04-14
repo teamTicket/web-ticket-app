@@ -1,0 +1,19 @@
+<div class="titulo-card">
+    <div class="selector">
+        <h4>Usuarios</h4>
+    </div>
+</div>
+<div class="cuerpo-card">
+    <div class="users-card">
+        <ul>
+            <li *ngFor="let usuario of usuarios" class="user-list">
+                <div class="datos">
+                    <img class="img-user-small" [src]="usuario.imagen" alt="usuario.nombre"> {{usuario.nombre}} {{usuario.apellido}}
+                </div>
+                <div class="num-tickets">
+                    <p>13k</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
